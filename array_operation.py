@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 def hasDuplicate(*array):
 	print array	#it become Tuple
 	for i in range(len(array)):
@@ -88,9 +90,29 @@ def binary_search1(ai, *array):
 					else:
 						return "Index is: -1"
 
-
 a = list(a)
 a.sort()
 for i in range(-1,len(a)+2):
 	print binary_search(i, *a)
 
+def atoi(str):
+	digit = {'0':0, '1':1,'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9}
+	integer = 0
+	sign = 1
+	for i in range(len(str)):
+		if (str[i] == '-'):
+			sign = -sign
+		elif (str[i]=='+'):
+			continue
+		elif (str[i]=='.'):
+			break
+		elif (str[i]>='0' and str[i]<='9'):
+			integer = integer * 10 + digit[str[i]]
+		else:
+			return 0
+	return integer * sign
+
+str = '+1234'
+str1 = '-1234.5'
+str2 = '123a45'
+print '{0} is {1}, {2} is {3}, {4} is {5}'. format (repr(str), atoi(str), repr(str1), atoi(str1), repr(str2), atoi(str2))
