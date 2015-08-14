@@ -116,3 +116,34 @@ str = '+1234'
 str1 = '-1234.5'
 str2 = '123a45'
 print '{0} is {1}, {2} is {3}, {4} is {5}'. format (repr(str), atoi(str), repr(str1), atoi(str1), repr(str2), atoi(str2))
+
+#from string import *   # to use split(string)
+def reverse_words(string):
+	#wlist = split(string)  #this split() must be imported
+	wlist = string.split()
+	wllast = len(wlist) - 1
+	for i in range(len(wlist)/2):
+		tem = wlist[i]
+		wlist[i] = wlist[wllast-i]
+		wlist[wllast-i] = tem
+	return ' '.join(wlist)
+
+string = 'Write a function to reverse the order of words in a string in place.'
+print reverse_words(string)
+
+def reverse_characters(string):
+	clist = list(string)
+	clist.reverse()
+	return ''.join(clist)
+
+def reverse_words_characters(string):
+	#wlist = split(string)  #this split() must be imported
+	wlist = string.split()
+	wllast = len(wlist) - 1
+	for i in range(len(wlist)/2):
+		tem = wlist[i]
+		wlist[i] = reverse_characters(wlist[wllast-i])
+		wlist[wllast-i] = reverse_characters(tem)
+	return ' '.join(wlist)
+
+print reverse_words_characters(string)
