@@ -213,9 +213,14 @@ def mergeSortIterate(array=[]):
 	a2 = array[k:]
 	a3 = merge(a1,a2)
 	return a3
+
 print "mergeSortTesting:"
 l4 = [0,8,2,10,6,14,4,12,1,11,9,3,15,7,5,13]
-l5 = mergeSortIterate(l4)
+#l5 = mergeSortIterate(l4)
+import cProfile
+#cProfile.run('l5 = mergeSortIterate(l4)')
+cProfile.run('l5 = mergeSort(l4)')
+
 print l5,l4
 l4 = [0,8,2,6,10,14,4,12,1,11,9,3,7,5,13]
 l5 = mergeSortIterate(l4)
@@ -241,3 +246,42 @@ print l5,l4
 l4 = [0,8,2,6,4,1,9]
 l5 = mergeSortIterate(l4)
 print l5,l4
+
+def quickSort(array, startIndex, endIndex):
+	pivot = array[startIndex+(endIndex - startIndex)/2]
+	i = startIndex
+	j = endIndex
+	temp = 0
+	#print "---------------------------------------------------------"
+	#print "s=", startIndex, ",e=", endIndex, ",pivot=", pivot, array
+	if ( (endIndex - startIndex) == 1):
+		if ( array[startIndex] > array[endIndex] ):
+			temp = array[startIndex]
+			array[startIndex] = array[endIndex]
+			array[endIndex] = temp
+		return
+	while(i<j):
+		while(array[i]<pivot):
+			i+=1
+		while(array[j]>pivot):
+			j-=1
+		if (i>=j):
+			break
+		temp = array[i]
+		array[i] = array[j]
+		i+=1
+		array[j] = temp
+		j-=1
+	#print "i=", i, ",j=", j, array
+	if (i-1 -startIndex >=1): 
+		quickSort(array, startIndex, i-1)
+	else:
+		quickSort(array, startIndex, i)
+	if (endIndex - i >=1 ): 
+		quickSort(array, i, endIndex)
+	else:
+		quickSort(array, i-1, endIndex)
+print "quickSort test:"
+l4 = [15,0,8,8,8,8,2,6,10,14,4,12,1,11,9,3,7,5,13]
+quickSort(l4, 0, len(l4)-1)
+print "array=", l4
