@@ -310,8 +310,16 @@ def find_kth_element(array, kth, startIndex, endIndex):
 		i+=1
 		j-=1
 	if (i>=kth):
-		return find_kth_element(array, kth, 0, j)
+		#return find_kth_element(array, kth, 0, j)	#works
+		if (i==j):
+			return find_kth_element(array, kth, startIndex, i)
+		else:
+			return find_kth_element(array, kth, startIndex, i-1)
 	else:
+		if (i>0 and array[i-1]>array[i]):
+			temp = array[i]
+			array[i] = array[i-1]
+			array[i-1] = temp
 		return find_kth_element(array, kth, i, endIndex)
 
 l5 = [15,0,8,8,2,6,10,14,4,12,1,11,9,3,7,5,13]
