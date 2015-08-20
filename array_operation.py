@@ -281,7 +281,41 @@ def quickSort(array, startIndex, endIndex):
 		quickSort(array, i, endIndex)
 	else:
 		quickSort(array, i-1, endIndex)
+
 print "quickSort test:"
-l4 = [15,0,8,8,8,8,2,6,10,14,4,12,1,11,9,3,7,5,13]
+l4 = [15,0,8,8,2,6,10,14,4,12,1,11,9,3,7,5,13]
 quickSort(l4, 0, len(l4)-1)
 print "array=", l4
+
+def find_kth_element(array, kth, startIndex, endIndex):
+	i= startIndex
+	j= endIndex
+	pivot = array[startIndex+(endIndex-startIndex)/2]
+	temp = 0
+	if (endIndex-startIndex<=1):
+		if (array[startIndex]>array[endIndex]):
+			temp = array[startIndex]
+			array[startIndex] = array[endIndex]
+			array[endIndex] = temp
+		return array[kth-1]
+	while (i<j):
+		while(array[i]<pivot):
+			i+=1
+		while (array[j]>pivot):
+			j-=1
+		if (i>=j): break
+		temp = array[i]
+		array[i] = array[j]
+		array[j] = temp
+		i+=1
+		j-=1
+	if (i>=kth):
+		return find_kth_element(array, kth, 0, j)
+	else:
+		return find_kth_element(array, kth, i, endIndex)
+
+l5 = [15,0,8,8,2,6,10,14,4,12,1,11,9,3,7,5,13]
+
+for i in range(1,len(l5)+1):
+	l6 =list(l5) #make new list
+	print i,"\bth element is ",find_kth_element(l6, i, 0, len(l5)-1), l6
